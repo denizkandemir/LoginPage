@@ -9,6 +9,7 @@
     height: 100vh;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     overflow-x: hidden;
 }
@@ -35,4 +36,15 @@
     color: white;
     font-size: 50px;
     font-weight: 700;
+}
+
+.logout-button {
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    padding: 10px 20px;
+    margin-top: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
 }

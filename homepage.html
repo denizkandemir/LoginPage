@@ -1,18 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="homepage.css">
     <title>HomePage</title>
 </head>
+
 <body>
     <div class="homepage-container">
         <h1 class="homepage-title"> WELCOME </h1>
+        <button class="logout-button" id="logout" onclick="handleLogout()"> Log Out </button>
         <div class="background-container">
             <video autoplay loop muted class="background-video" src="imgs/homepageVideo.mp4"></video>
         </div>
     </div>
-    
+
 </body>
+
 </html>
+
+<script>
+    let checkKeepLogin = JSON.parse(localStorage.getItem("keepLogin")) || false;
+
+    const handleLogout = () => {
+        checkKeepLogin = false;
+        localStorage.setItem("keepLogin", JSON.stringify(checkKeepLogin));
+        window.location.assign("Login.html")
+    }
+</script>
