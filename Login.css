@@ -1,0 +1,185 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.page-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.background-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  filter: brightness(80%);
+}
+
+.background-img {
+  object-fit: cover;
+  width: 100vw;
+  height: 100%;
+}
+
+.login-card-container {
+  padding: 0px 60px;
+  height: 415px;
+  width: 450px;
+  perspective: 1000px;
+}
+
+.login-content-container {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.login-front-content-container,
+.login-back-content-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.login-front-content-container {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px 41px;
+  border-radius: 10px;
+  backdrop-filter: blur(7px);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.login-back-content-container {
+  transform: rotateY(180deg);
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(7px);
+  padding: 20px 41px;
+  border-radius: 10px;
+  height: 500px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.change-face .login-content-container {
+  transform: rotateY(180deg);
+}
+
+.card-title {
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.card-alert-p-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  gap: 5px;
+}
+
+.card-alert-p {
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 500;
+}
+
+.sign-up-p {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+}
+
+.inputs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 15px;
+}
+
+.card-input {
+  background: transparent;
+  background-color: rgba(203, 198, 198, 0.3);
+  padding: 9.5px;
+  border: 1px rgba(0, 0, 0, 0.6) solid;
+  border: none;
+  border-radius: 5px;
+  width: 245px;
+  color: white;
+  margin-top: 4px;
+}
+
+.input-p {
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 300;
+}
+
+.logged-in-p {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 14px;
+}
+
+.logged-in-check {
+  display: flex;
+  margin-top: 8px;
+  gap: 6px;
+  align-items: center;
+  margin-left: 2px;
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  background-color: rgba(203, 198, 198, 0.4);
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  background-color: black;
+  border: 1px solid white;
+}
+
+.login-button {
+    margin-top: 20px;
+    padding: 9.5px;
+    border-radius: 5px;
+    border: none;
+    width: 245px;
+    color: white;
+    background: transparent;
+    cursor: pointer;
+    border: white 1px solid;
+}
+
+.forgot-p {
+    text-align: center;
+    margin-top: 12px;
+    color: white;
+    cursor: pointer;
+}
+
+.social-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 20px;
+}
