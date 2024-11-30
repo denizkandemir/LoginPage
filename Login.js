@@ -9,7 +9,7 @@ const handleKeepLogin = () => {
   }
 };
 
-const signNewMember = async() => {
+const signNewMember = async () => {
   const newUser = await signInErrorHandling();
   console.log(newUser);
 
@@ -35,7 +35,7 @@ const checkUser = (newUser) => {
   } else {
     if (isMail) {
       alert("This email is already exist");
-      console.log(isMail)
+      console.log(isMail);
     } else {
       alert("This username already exist. Please try another one");
     }
@@ -62,9 +62,9 @@ async function signInErrorHandling() {
     return false;
   } else {
     const userId = users.length !== 0 ? users.length + 1 : 1;
-    console.log(userId)
+    console.log(userId);
     const userAnimal = await handleRememberAnimals();
-    console.log(userAnimal)
+    console.log(userAnimal);
     const userNumber = await handleRememberNumbers();
     const user = {
       name: nameValue,
@@ -161,10 +161,14 @@ const handleRememberAnimals = () => {
       "remember-button-container"
     );
     let selectedAnimals = [];
-
-    for (let i = 0; i < 4; i++) {
+    let randomIndexs = [];
+    
+    while (selectedAnimals.length < 4) {
       const randomIndex = Math.floor(Math.random() * rememberAnimals.length);
-      selectedAnimals.push(rememberAnimals[randomIndex]);
+      if (!randomIndexs.includes(randomIndex)) {
+        randomIndexs.push(randomIndex);
+        selectedAnimals.push(rememberAnimals[randomIndex]);
+      }
     }
 
     rememberContainer.innerHTML = "";
@@ -183,19 +187,20 @@ const handleRememberAnimals = () => {
   `;
     const animalButton = document.getElementById("remember-animal-button");
     let selectedAnimal;
-    console.log(animalButton)
+    console.log(animalButton);
 
     animalButton.addEventListener("click", () => {
       const radio = document.querySelector(
         'input[name="animal-choose"]:checked'
       );
-     
+
       if (radio) {
-        console.log("anan")
-        selectedAnimal = rememberAnimals.find((animal) => animal.id === parseInt(radio.id.split("-")[1]));
+        selectedAnimal = rememberAnimals.find(
+          (animal) => animal.id === parseInt(radio.id.split("-")[1])
+        );
         resolve(selectedAnimal);
       } else {
-        reject("No animals selected");
+        alert("No Animals selected");
       }
     });
   });
@@ -212,9 +217,14 @@ const handleRememberNumbers = () => {
     rememberContainer.innerHTML = "";
 
     let randomNumbers = [];
+    let uniqueRandomNumbers = [];
 
-    for (let i = 0; i < 4; i++) {
-      randomNumbers.push(Math.floor(Math.random() * 100) + 1);
+    while (uniqueRandomNumbers.length < 4) {
+      const randomNumber = (Math.floor(Math.random() * 100) + 1);
+       if (!randomNumbers.includes(randomNumber)) {
+         uniqueRandomNumbers.push(randomNumber);
+         randomNumbers.push(randomNumber);
+       }
     }
 
     randomNumbers.map((number) => {
@@ -234,14 +244,16 @@ const handleRememberNumbers = () => {
     numberButton.addEventListener("click", () => {
       const radio = document.querySelector(
         'input[name="number-choose"]:checked'
-      ); 
+      );
       if (radio) {
-        selectedNumber = randomNumbers.find((number) => number === parseInt(radio.id.split("-")[1]));
+        selectedNumber = randomNumbers.find(
+          (number) => number === parseInt(radio.id.split("-")[1])
+        );
         rememberAllContainer.style.display = "none";
         signUpContainer.style.display = "block";
         resolve(selectedNumber);
       } else {
-        reject("No numbers selected");
+        alert("No numbers selected")
       }
     });
   });
