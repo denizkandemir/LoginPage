@@ -183,3 +183,27 @@ input[type="checkbox"]:checked {
     gap: 30px;
     margin-top: 20px;
 }
+
+.remember-animal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.animal-img {
+  object-fit: cover;
+  width: 50px;
+  border-radius: 5px;
+}
+
+.animal-p {
+  margin-top: 5px;
+  color: white;
+  font-size: 16px;
+}
+
+.remember-radio {
+  margin-top: 15px;
+}
