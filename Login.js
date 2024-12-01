@@ -11,33 +11,34 @@ const handleKeepLogin = () => {
 
 const signNewMember = async () => {
   const newUser = await signInErrorHandling();
-  console.log(newUser);
 
   if (newUser !== false) {
-    checkUser(newUser);
-    rotateAnimation("front");
+    users = JSON.parse(localStorage.getItem("users")) || [];
+    users.push(newUser);
+    localStorage.setItem("users", JSON.stringify(users));
+    alert("Successfully registered.Please log in.");
     const inputs = document.querySelectorAll(".card-input");
     inputs.forEach((input) => {
       input.value = "";
     });
+    rotateAnimation("front");
   }
 };
 
-const checkUser = (newUser) => {
+const checkInfo = (mail, userName) => {
   users = JSON.parse(localStorage.getItem("users")) || [];
-  const isUser = users.find((user) => user.username === newUser.username);
-  const isMail = users.find((user) => user.email === newUser.email);
+  const isUser = users.find((user) => user.username === userName);
+  const isMail = users.find((user) => user.email === mail);
 
   if (!isUser && !isMail) {
-    users.push(newUser);
-    localStorage.setItem("users", JSON.stringify(users));
-    alert("Successfully registered.Please log in.");
+    return true;
   } else {
     if (isMail) {
       alert("This email is already exist");
-      console.log(isMail);
+      return false;
     } else {
       alert("This username already exist. Please try another one");
+      return false;
     }
   }
 };
@@ -61,21 +62,25 @@ async function signInErrorHandling() {
     alert("Please enter your user name");
     return false;
   } else {
-    const userId = users.length !== 0 ? users.length + 1 : 1;
-    console.log(userId);
-    const userAnimal = await handleRememberAnimals();
-    console.log(userAnimal);
-    const userNumber = await handleRememberNumbers();
-    const user = {
-      name: nameValue,
-      email: emailValue,
-      username: userNameValue,
-      password: passwordValue,
-      id: userId,
-      selectedAnimal: userAnimal,
-      selectedNumber: userNumber,
-    };
-    return user;
+    const checkUser = checkInfo(emailValue, userNameValue);
+
+    if (checkUser) {
+      const userId = users.length !== 0 ? users.length + 1 : 1;
+      const userAnimal = await handleRememberAnimals();
+      const userNumber = await handleRememberNumbers();
+      const user = {
+        name: nameValue,
+        email: emailValue,
+        username: userNameValue,
+        password: passwordValue,
+        id: userId,
+        selectedAnimal: userAnimal,
+        selectedNumber: userNumber,
+      };
+      return user;
+    } else {
+      return false;
+    }
   }
 }
 
@@ -162,7 +167,7 @@ const handleRememberAnimals = () => {
     );
     let selectedAnimals = [];
     let randomIndexs = [];
-    
+
     while (selectedAnimals.length < 4) {
       const randomIndex = Math.floor(Math.random() * rememberAnimals.length);
       if (!randomIndexs.includes(randomIndex)) {
@@ -182,12 +187,15 @@ const handleRememberAnimals = () => {
     `;
     });
 
-    rememberAllContainer.innerHTML += `
-   <button class="remember-button" id="remember-animal-button"> Confrim </button>
-  `;
+    rememberAllContainer.innerHTML += `<button class="remember-button" id="remember-animal-button"> Confrim </button>`;
+    const titleP = document.createElement("p");
+    const textP = document.createElement("p");
+    titleP.textContent = "Choose an Animal";
+    titleP.classList.add("remember-title-p");
+    textP.textContent = "Remember your choice to renew your password";
+    textP.classList.add("remember-text-p");
+    rememberAllContainer.prepend(titleP, textP);
     const animalButton = document.getElementById("remember-animal-button");
-    let selectedAnimal;
-    console.log(animalButton);
 
     animalButton.addEventListener("click", () => {
       const radio = document.querySelector(
@@ -195,7 +203,7 @@ const handleRememberAnimals = () => {
       );
 
       if (radio) {
-        selectedAnimal = rememberAnimals.find(
+        const selectedAnimal = rememberAnimals.find(
           (animal) => animal.id === parseInt(radio.id.split("-")[1])
         );
         resolve(selectedAnimal);
@@ -211,7 +219,7 @@ const handleRememberNumbers = () => {
     const rememberAllContainer = document.getElementById(
       "remember-button-container"
     );
-    rememberAllContainer.innerHTML = ` <div class="sign-in-remember-container" id="remember-container"></div>`;
+    rememberAllContainer.innerHTML = ` <div class="all-numbers-container sign-in-remember-container" id="remember-container"></div>`;
     const rememberContainer = document.getElementById("remember-container");
     const signUpContainer = document.getElementById("sign-up-container");
     rememberContainer.innerHTML = "";
@@ -220,11 +228,11 @@ const handleRememberNumbers = () => {
     let uniqueRandomNumbers = [];
 
     while (uniqueRandomNumbers.length < 4) {
-      const randomNumber = (Math.floor(Math.random() * 100) + 1);
-       if (!randomNumbers.includes(randomNumber)) {
-         uniqueRandomNumbers.push(randomNumber);
-         randomNumbers.push(randomNumber);
-       }
+      const randomNumber = Math.floor(Math.random() * (100 - 10 + 1)) + 10;
+      if (!randomNumbers.includes(randomNumber)) {
+        uniqueRandomNumbers.push(randomNumber);
+        randomNumbers.push(randomNumber);
+      }
     }
 
     randomNumbers.map((number) => {
@@ -238,24 +246,135 @@ const handleRememberNumbers = () => {
     rememberAllContainer.innerHTML += `
      <button class="remember-button" id="remember-number-button"> Confrim </button>
   `;
+    const titleP = document.createElement("p");
+    const textP = document.createElement("p");
+    titleP.textContent = "Choose a Number";
+    titleP.classList.add("remember-title-p");
+    textP.textContent = "Remember your choice to renew your password";
+    textP.classList.add("remember-text-p");
+    rememberAllContainer.prepend(titleP, textP);
+
     const numberButton = document.getElementById("remember-number-button");
-    let selectedNumber;
 
     numberButton.addEventListener("click", () => {
       const radio = document.querySelector(
         'input[name="number-choose"]:checked'
       );
       if (radio) {
-        selectedNumber = randomNumbers.find(
+        const selectedNumber = randomNumbers.find(
           (number) => number === parseInt(radio.id.split("-")[1])
         );
         rememberAllContainer.style.display = "none";
         signUpContainer.style.display = "block";
+        console.log(signUpContainer);
         resolve(selectedNumber);
       } else {
-        alert("No numbers selected")
+        alert("No numbers selected");
       }
     });
+  });
+};
+
+const handleForget = () => {
+  const card = document.getElementById("card-container");
+  const loginContainer = document.getElementById("login-container");
+  const passwordContainer = document.getElementById("forget-password");
+  loginContainer.style.display = "none";
+  passwordContainer.style.display = "block";
+  card.style.height = "500px";
+
+  passwordContainer.innerHTML = `
+     <h1 class="card-title"> Renew Your Password </h1>
+   <div class="inputs-container">
+    <div class="input-p-container">
+      <p class="input-p"> Username </p>
+      <input type="text" id="forget-username-input" class="card-input">
+    </div>
+    <div class="input-p-container">
+      <p class="input-p"> Email </p>
+      <input type="text" id="forget-email-input" class="card-input">
+   </div>
+    <div class="login-button-p-container">
+        <button onclick="checkForgetMail()" class="login-button"> Confrim </button>
+     </div>
+  </div> 
+  `;
+};
+
+
+const checkForgetMail = async() => {
+  users = JSON.parse(localStorage.getItem("users")) || [];
+
+  const userNameValue = document.getElementById(
+    "forget-username-input"
+  ).value;
+  const mailValue = document.getElementById("forget-email-input").value;
+  const userInfo = users.find((user) => userNameValue === user.userName);
+  const passwordContainer = document.getElementById("forget-password");
+  
+  if (userInfo && userInfo.email === mailValue) {
+    passwordContainer.innerHTML = `
+    <h3 class="forget-title"> Choose an Animal </h3>
+    <p class="forget-p"> Select the same animal you had selected before for sign up </p>
+    <div class="forget-ask-container" id="forget-ask-container"></div>
+    <button class="remember-button"  id="forget-animal-button"> Confrim </button>
+  `;
+ 
+  const selectedAnimal = await askAnimal();
+
+  }else {
+    alert("Can't Find The User");
+  }
+}
+
+
+const askAnimal = () => {
+  return new Promise((resolve, reject) => {
+      const animalContainer = document.getElementById("forget-ask-container");
+      const userAnimal = userInfo.selectedAnimal;
+      let selectedAnimals = [];
+      let randomIndexs = [];
+  
+      while (selectedAnimals.length < 3) {
+        const randomIndex = Math.floor(Math.random() * rememberAnimals.length);
+        if (!randomIndexs.includes(randomIndex)) {
+          randomIndexs.push(randomIndex);
+          selectedAnimals.push(rememberAnimals[randomIndex]);
+        }
+      }
+
+      const randomIndex = Math.floor(Math.random() * (selectedAnimals.length + 1));
+      selectedAnimals.splice(randomIndex, 0, userAnimal);
+
+      let content = "";
+      selectedAnimals.map((animal) => {
+        content = `
+        <div class="remember-animal-container"> 
+          <img src=${animal.img} class="animal-img"/>
+          <p class="animal-p"> ${animal.name} </p>
+          <input type="radio" id="animal-${animal.id}" name="forget-animal-choose" class="remember-radio">
+        </div> 
+      `;
+      });
+      animalContainer.innerHTML = content;
+
+      const forgetAnimalButton = document.getElementById("forget-animal-id");
+
+      forgetAnimalButton.addEventListener(("click") , () => {
+        const radio = document.querySelector(
+          'input[name="animal-choose"]:checked'
+        );
+  
+        if (radio) {
+          const selectedAnimal = rememberAnimals.find(
+            (animal) => animal.id === parseInt(radio.id.split("-")[1])
+          );
+          resolve(selectedAnimal);
+        } else {
+          alert("No Animals selected");
+        }
+      });
+  
   });
 };
 

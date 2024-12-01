@@ -201,7 +201,7 @@ input[type="checkbox"]:checked {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 15px 30px;
 }
 
 .remember-animal-container {
@@ -214,6 +214,7 @@ input[type="checkbox"]:checked {
 .animal-img {
   object-fit: cover;
   width: 90px;
+  height: 90px;
   border-radius: 5px;
 }
 
@@ -234,5 +235,45 @@ input[type="checkbox"]:checked {
   color: white;
   font-size: 17px;
   padding: 8px 20px;
+  cursor: pointer;
   border-radius: 6px;
+}
+
+.remember-title-p {
+  color: white;
+  font-size: 32px;
+}
+
+.remember-text-p {
+  color: rgba(255, 255, 255, 0.82);
+ font-size: 16px;
+ text-align: center;
+ margin-top: 5px;
+ margin-bottom: 15px;
+}
+
+.remember-number-container {
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ gap: 5px;
+}
+
+.select-number {
+  color: white;
+  font-size: 23px;
+  border-radius: 50%;
+  border: 1px solid white;
+  padding: 15px 17px;
+}
+
+.all-numbers-container {
+  margin-bottom: 20px;
+  margin-top: 10px;
+  gap: 30px 40px;
+}
+
+.forgot-password-container {
+  display: none;
 }
