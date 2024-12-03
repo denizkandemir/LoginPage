@@ -193,7 +193,6 @@ input[type="checkbox"]:checked {
  flex-direction: column;
  justify-content: center;
  align-items: center;
- 
 }
 
 .sign-in-remember-container {
@@ -229,7 +228,6 @@ input[type="checkbox"]:checked {
 }
 
 .remember-button {
-  margin-top: 20px;
   border: 1px solid white;
   background: transparent;
   color: white;
@@ -276,4 +274,55 @@ input[type="checkbox"]:checked {
 
 .forgot-password-container {
   display: none;
+}
+
+.forget-animals-container {
+  display: flex;
+  justify-content: center;
+  gap: 25px 35px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.forget-title {
+  color: white;
+  font-size: 30px;
+  text-align: center;
+}
+
+.forget-p {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.82);
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+.forget-numbers-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px 50px;
+  margin-bottom: 25px;
+  margin-top: 25px;
+  flex-wrap: wrap;
+}
+
+.new-password-title {
+  font-size: 28px;
+  margin-top: 10px;
+  color: white;
+  text-align: center;
+}
+
+.forget-input-litte-p {
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 300; 
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.new-password-input {
+  margin-bottom: 20px;
 }
