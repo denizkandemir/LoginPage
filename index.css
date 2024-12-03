@@ -150,6 +150,7 @@
   display: flex;
   gap: 6px;
   align-items: center;
+  cursor: pointer;
   align-self: flex-start;
   margin-left: 2px;
 }
@@ -162,6 +163,7 @@ input[type="checkbox"] {
   background-color: rgba(203, 198, 198, 0.4);
   border-radius: 8px;
   border: none;
+  cursor: pointer;
   outline: none;
   cursor: pointer;
 }
