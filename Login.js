@@ -237,7 +237,7 @@ const handleRememberNumbers = () => {
     let uniqueRandomNumbers = [];
 
     while (uniqueRandomNumbers.length < 4) {
-      const randomNumber = Math.floor(Math.random() * (100 - 10 + 1)) + 10;
+      const randomNumber = Math.floor(Math.random() * (99 - 10 + 1)) + 10;
       if (!randomNumbers.includes(randomNumber)) {
         uniqueRandomNumbers.push(randomNumber);
         randomNumbers.push(randomNumber);
