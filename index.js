@@ -188,7 +188,7 @@ const handleRememberAnimals = () => {
       content += `
      <div class="remember-animal-container"> 
        <img src=${animal.img} class="animal-img" alt=${animal.name}/>
-       <input type="radio" id="animal-${animal.id}" name="animal-choose" class="remember-radio">
+       <input type="radio" autocomplete="off"  id="animal-${animal.id}" name="animal-choose" class="remember-radio">
      </div> 
     `;
     });
@@ -249,7 +249,7 @@ const handleRememberNumbers = () => {
       content += `
      <div class="remember-number-container"> 
        <p class="select-number"> ${number} </p>
-       <input type="radio" id="number-${number}" name="number-choose" class="remember-radio">
+       <input type="radio" autocomplete="off"  id="number-${number}" name="number-choose" class="remember-radio">
      </div> 
     `;
     });
@@ -297,11 +297,11 @@ const handleForget = () => {
    <div class="inputs-container">
     <div class="input-p-container">
       <p class="input-p"> Username </p>
-      <input type="text" id="forget-username-input" class="card-input">
+      <input type="text" autocomplete="off"  id="forget-username-input" class="card-input">
     </div>
     <div class="input-p-container">
       <p class="input-p"> Email </p>
-      <input type="text" id="forget-email-input" class="card-input">
+      <input type="text" autocomplete="off"  id="forget-email-input" class="card-input">
    </div>
     <div class="login-button-p-container">
         <button onclick="checkForgetMail()" class="login-button"> Confrim </button>
@@ -336,7 +336,7 @@ const checkForgetMail = async () => {
      <h3 class="new-password-title"> Your New Password </h3>
      <p class="forget-p" id="forget-p"> Determine a new pasasword </p>
      <p class="forget-input-litte-p"> Password  </p>
-     <input type="text" id="new-password-input" class="new-password-input card-input"/>
+     <input type="text" autocomplete="off"  id="new-password-input" class="new-password-input card-input"/>
      <div class="remember-button-container">
        <button class="remember-button" id="new-password-button"> Confrim </button>
       </div> 
