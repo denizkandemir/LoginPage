@@ -426,7 +426,7 @@ const askNumber = (userInfo) => {
     const forgetP = document.getElementById("forget-p");
     card.style.height = "415px";
     const userNumber = userInfo.selectedNumber;
-    let selectedNumbers = [];
+    let selectedNumbers = []; 
     let uniqueRandomNumbers = [];
 
     while (selectedNumbers.length < 3) {
