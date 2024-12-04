@@ -156,6 +156,37 @@ const rememberAnimals = [
     img: "imgs/loginAnimal6.png",
     name: "horse",
   },
+
+  {
+    id: 7,
+    img: "imgs/loginAnimal7.png",
+    name: "butterfly",
+  },
+
+  {
+    id: 8,
+    img: "imgs/loginAnimal8.png",
+    name: "eagle",
+  },
+
+  {
+    id: 9,
+    img: "imgs/loginAnimal9.png",
+    name: "lion",
+  },
+
+  {
+    id: 10,
+    img: "imgs/loginAnimal10.png",
+    name: "penguin",
+  },
+
+  {
+    id: 11,
+    img: "imgs/loginAnimal11.png",
+    name: "tiger",
+  },
+  
 ];
 
 const handleRememberAnimals = () => {
