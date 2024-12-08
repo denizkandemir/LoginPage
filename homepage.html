@@ -10,7 +10,8 @@
 
 <body>
     <div class="homepage-container">
-        <h1 class="homepage-title"> WELCOME </h1>
+        <div class="welcome-title-container" id="welcome-title-container"></div>
+        <h1 class="homepage-title" id="homepage-welcome">  </h1>
         <button class="logout-button" id="logout" onclick="handleLogout()"> Log Out </button>
         <div class="background-container">
             <video autoplay loop muted class="background-video" src="imgs/homepageVideo.mp4"></video>
@@ -24,9 +25,18 @@
 <script>
     let checkKeepLogin = JSON.parse(localStorage.getItem("keepLogin")) || false;
 
+    const user = JSON.parse(localStorage.getItem("loggedUser")) || false;
+
+    console.log(user)
+    if (user) {
+        const welcomeTitle = document.getElementById("homepage-welcome");
+        welcomeTitle.textContent = `Welcome ${user.username}`;
+    }
+
     const handleLogout = () => {
         checkKeepLogin = false;
         localStorage.setItem("keepLogin", JSON.stringify(checkKeepLogin));
+        localStorage.setItem("loggedUser", JSON.stringify(null));
         window.location.assign("index.html")
     }
 </script>

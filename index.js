@@ -101,6 +101,7 @@ const handleLogin = () => {
       alert("Login Succesfull");
       const keepLogin = loginCheckbox.checked;
       localStorage.setItem("keepLogin", JSON.stringify(keepLogin));
+      localStorage.setItem("loggedUser", JSON.stringify(loginUser));
       window.location.assign("homepage.html");
     } else {
       alert("Wrong Password");
